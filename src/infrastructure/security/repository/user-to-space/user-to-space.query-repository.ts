@@ -5,6 +5,14 @@ import {
   UserToSpaceQueryRepositoryInterface
 } from '../../../../domain/repository/user-to-space/user-to-space.query-repository.interface';
 import { UserToSpaceRepository } from './user-to-space.repository';
+import { UserInterface } from '../../../../domain/model/security/user.model';
+import { FindOneOptions } from "typeorm/find-options/FindOneOptions";
+import { UserToSpaceInterface } from '../../../../domain/model/security/user-to-space.model';
+import { UserToSpaceEntity } from '../../entity/user-to-space.entity';
+import { SpaceInterface } from '../../../../domain/model/security/space.model';
+import {
+  UserToSpaceRepositoryException
+} from '../../../../domain/repository/user-to-space/user-to-space.repository.exception';
 
 @Injectable()
 export class UserToSpaceQueryRepository implements UserToSpaceQueryRepositoryInterface {
@@ -15,5 +23,21 @@ export class UserToSpaceQueryRepository implements UserToSpaceQueryRepositoryInt
     @Inject(LoggerAdapterService) logger: LoggerInterface
   ) {
     this._logger = logger;
+  }
+
+  public async findOneByUserAndSpace(user: UserInterface, space: SpaceInterface, sources: []): Promise<UserToSpaceInterface | null> {
+    try {
+      let options: FindOneOptions<UserToSpaceEntity> = {};
+      if (sources && sources.length) { options.select = sources; }
+      return await this.repository.findOneOrFail({ user, space }, options);
+    } catch (e) {
+      if (e.name === 'EntityNotFound') {
+        this._logger.warn(`UserToSpaceQueryRepository - findOneByUserUuidAndSpaceUuid - userToSpace not found with User ${user.uuid} and Space ${space.uuid}`);
+        return null;
+      }
+      const message: string = `UserToSpaceQueryRepository - Error on findOneByUserUuidAndSpaceUuid User ${user.uuid} and Space ${space.uuid}`;
+      this._logger.error(message);
+      throw new UserToSpaceRepositoryException(message);
+    }
   }
 }

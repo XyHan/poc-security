@@ -35,11 +35,19 @@ import {
 } from './provider/query/space/get-one-space-by-objectable-uuid-query-handler.provider';
 import { UserToSpaceQueryRepository } from './repository/user-to-space/user-to-space.query-repository';
 import { UserToSpaceCommandRepository } from './repository/user-to-space/user-to-space.command-repository';
+import { UserToSpaceRepository } from './repository/user-to-space/user-to-space.repository';
+import { UserToSpaceCommandHandlers } from './command/user-to-space';
+import {
+  bindUserToSpaceCommandHandlerProvider
+} from './provider/command/user-to-space/bind-user-to-space-command-handler.provider';
+import {
+  unbindUserToSpaceCommandHandlerProvider
+} from './provider/command/user-to-space/unbind-user-to-space-command-handler.provider';
 
 @Module({
   imports: [
     CqrsModule,
-    TypeOrmModule.forFeature([UserRepository, SpaceRepository]),
+    TypeOrmModule.forFeature([UserRepository, SpaceRepository, UserToSpaceRepository]),
     LoggerModule,
   ],
   providers: [
@@ -70,6 +78,9 @@ import { UserToSpaceCommandRepository } from './repository/user-to-space/user-to
     ...SpaceCommandHandlers,
     UserToSpaceQueryRepository,
     UserToSpaceCommandRepository,
+    bindUserToSpaceCommandHandlerProvider,
+    unbindUserToSpaceCommandHandlerProvider,
+    ...UserToSpaceCommandHandlers
   ],
   exports: [
     UserQueryRepository,
