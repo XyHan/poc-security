@@ -23,7 +23,12 @@ export class UserQueryRepository implements UserQueryRepositoryInterface {
     try {
       let options: FindOneOptions<UserEntity> = {};
       if (sources && sources.length) { options.select = sources; }
-      return await this.repository.findOneOrFail({ uuid }, options);
+      return await this.repository
+          .createQueryBuilder('user')
+          .leftJoinAndSelect('user.userSpaces', 'userToSpace')
+          .leftJoinAndSelect('userToSpace.space', 'space')
+          .where({ uuid })
+          .getOneOrFail()
     } catch (e) {
       if (e.name === 'EntityNotFound') {
         this._logger.warn(`UserQueryRepository - findOneByUuid - User ${uuid} not found`);

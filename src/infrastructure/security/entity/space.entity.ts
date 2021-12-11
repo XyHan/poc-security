@@ -38,5 +38,5 @@ export class SpaceEntity implements SpaceInterface {
 
   @Expose()
   @OneToMany(() => UserToSpaceEntity, userToSpace => userToSpace.space)
-  public userToSpace: UserToSpaceInterface[];
+  public bindedUsers: UserToSpaceInterface[];
 }

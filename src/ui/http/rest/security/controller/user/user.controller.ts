@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Inject,
   Param,
   Post,
@@ -101,6 +102,32 @@ export class UserController extends BaseController {
       return await this.findOneUserByUuid(uuid);
     } catch (e) {
       const message: string = `UserController - Delete user ${uuid} error: ${e.message}`;
+      this.http400Response(message);
+    }
+  }
+
+  @Get('/:uuid')
+  @UseGuards(AuthGuard)
+  @Roles('ADMIN', 'SUPER_ADMIN')
+  public async getOneUser(@Param('uuid') uuid: string): Promise<UserInterface> {
+    try {
+      const query = new GetOneUserByUuidQuery(uuid, []);
+      return await this._queryBus.execute(query);
+    } catch (e) {
+      const message: string = `UserController - getOneUser ${uuid} user error: ${e.message}`;
+      this.http400Response(message);
+    }
+  }
+
+  @Get('/')
+  @UseGuards(AuthGuard)
+  @Roles('ADMIN', 'SUPER_ADMIN')
+  public async getMyUser(@CurrentUser() user: UserInterface): Promise<UserInterface> {
+    try {
+      const query = new GetOneUserByUuidQuery(user.uuid, []);
+      return await this._queryBus.execute(query);
+    } catch (e) {
+      const message: string = `UserController - getMyUser ${user.uuid} user error: ${e.message}`;
       this.http400Response(message);
     }
   }

@@ -104,7 +104,7 @@ CREATE TABLE `user-to-space` (
   KEY `FK_7e68972ca5ab6f2f3d4dcf58d64` (`spaceId`),
   CONSTRAINT `FK_7e68972ca5ab6f2f3d4dcf58d64` FOREIGN KEY (`spaceId`) REFERENCES `space` (`id`),
   CONSTRAINT `FK_a90c63b1853bc6b7f1f7041936c` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,6 +113,7 @@ CREATE TABLE `user-to-space` (
 
 LOCK TABLES `user-to-space` WRITE;
 /*!40000 ALTER TABLE `user-to-space` DISABLE KEYS */;
+INSERT INTO `user-to-space` VALUES (1,'2021-12-11 20:52:52','f2239ae3-d262-452d-9cd9-5741890fba9b','ADMIN',2,3);
 /*!40000 ALTER TABLE `user-to-space` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -125,4 +126,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-11 18:03:12
+-- Dump completed on 2021-12-11 20:53:34

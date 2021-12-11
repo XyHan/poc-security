@@ -12,11 +12,11 @@ export class UserToSpaceEntity implements UserToSpaceInterface {
   @PrimaryGeneratedColumn({ name: 'id' }) private id: number;
 
   @Expose()
-  @ManyToOne(() => UserEntity, user => user.userToSpace)
+  @ManyToOne(() => UserEntity, user => user.userSpaces)
   public user!: UserInterface;
 
   @Expose()
-  @ManyToOne(() => SpaceEntity, space => space.userToSpace)
+  @ManyToOne(() => SpaceEntity, space => space.bindedUsers)
   public space!: SpaceInterface;
 
   @Expose()
