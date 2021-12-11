@@ -33,6 +33,8 @@ import { deleteASpaceCommandHandlerProvider } from './provider/command/space/del
 import {
   getOneSpaceByObjectableUuidQueryHandlerProvider
 } from './provider/query/space/get-one-space-by-objectable-uuid-query-handler.provider';
+import { UserToSpaceQueryRepository } from './repository/user-to-space/user-to-space.query-repository';
+import { UserToSpaceCommandRepository } from './repository/user-to-space/user-to-space.command-repository';
 
 @Module({
   imports: [
@@ -65,13 +67,17 @@ import {
     ...SpaceQueryHandlers,
     createASpaceCommandHandlerProvider,
     deleteASpaceCommandHandlerProvider,
-    ...SpaceCommandHandlers
+    ...SpaceCommandHandlers,
+    UserToSpaceQueryRepository,
+    UserToSpaceCommandRepository,
   ],
   exports: [
     UserQueryRepository,
     UserCommandRepository,
     SpaceQueryRepository,
     SpaceCommandRepository,
+    UserToSpaceQueryRepository,
+    UserToSpaceCommandRepository,
     AuthService
   ]
 })
