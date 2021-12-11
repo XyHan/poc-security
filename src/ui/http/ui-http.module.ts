@@ -11,6 +11,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ConfigModule } from '../../infrastructure/config/config.module';
 import { ConfigService } from '../../infrastructure/config/config.service';
 import { SpaceController } from './rest/security/controller/space/space.controller';
+import { UserToSpaceController } from './rest/security/controller/user-to-space/user-to-space.controller';
 
 @Module({
   imports: [
@@ -34,7 +35,8 @@ import { SpaceController } from './rest/security/controller/space/space.controll
     AppController,
     UserController,
     AuthController,
-    SpaceController
+    SpaceController,
+    UserToSpaceController
   ],
 })
 export class UiHttpModule {}

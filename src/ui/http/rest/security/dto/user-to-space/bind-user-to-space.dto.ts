@@ -3,12 +3,6 @@ import { IsAvailableRole } from '../../validator/role/is-available-role.decorato
 import { RolesValueObject } from '../../../../../../infrastructure/security/value-object/roles.value-object';
 
 export class BindUserToSpaceDto {
-  @IsString()
-  userUuid: string;
-
-  @IsString()
-  spaceUuid: string;
-
   @IsArray()
   @IsNotEmpty()
   @IsAvailableRole(RolesValueObject.availableUserRoles)

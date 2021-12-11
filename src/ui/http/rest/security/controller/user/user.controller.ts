@@ -25,7 +25,6 @@ import { GetOneUserByUuidQuery } from '../../../../../../application/query/user/
 import { UserEntity } from '../../../../../../infrastructure/security/entity/user.entity';
 import { AuthGuard } from '../../../../guard/auth.guard';
 import { CurrentUser } from '../../../../../../infrastructure/security/decorator/current-user.decorator';
-import { RolesValueObject } from '../../../../../../infrastructure/security/value-object/roles.value-object';
 import { Roles } from '../../../../../../infrastructure/security/decorator/role.decorator';
 
 @Controller('/users')
