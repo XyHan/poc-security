@@ -1,4 +1,4 @@
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
@@ -12,7 +12,7 @@ import { DeleteAUserCommandHandlerException } from './delete-a-user.command.hand
 const UUID = '0d66db91-4441-4563-967c-797d767c7288';
 const UPDATEDBY = 'fa9f9d7d-3303-4b08-ad27-61bd605c9d19';
 
-describe('delete a user handler test', () => {
+describe('delete a security handler test', () => {
   const logger: LoggerInterface = new LoggerMock();
   let commandRepository: UserCommandRepositoryInterface;
   let queryRepository: UserQueryRepositoryInterface;
@@ -22,7 +22,7 @@ describe('delete a user handler test', () => {
     queryRepository = new UserQueryRepositoryMock();
   })
 
-  it ('delete a user success', async () => {
+  it ('delete a security success', async () => {
     const user: UserInterface | null = await queryRepository.findOneByUuid(UUID, []);
     expect(user.uuid).toBe(UUID);
 
@@ -34,7 +34,7 @@ describe('delete a user handler test', () => {
     expect(deletedUser.updatedBy).toBe(UPDATEDBY);
   });
 
-  it('delete a user error', async () => {
+  it('delete a security error', async () => {
     const command = new DeleteAUserCommand('', '');
     const handler = new DeleteAUserCommandHandler(commandRepository, queryRepository, logger);
     await expect(handler.handle(command)).rejects.toThrowError(DeleteAUserCommandHandlerException);

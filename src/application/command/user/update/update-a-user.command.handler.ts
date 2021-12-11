@@ -1,7 +1,7 @@
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { CommandHandlerInterface } from '../../command-handler.interface';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
 import { UpdateAUserCommandHandlerException } from './update-a-user.command.handler.exception';
 import { UpdateAUserCommand } from './update-a-user.command';

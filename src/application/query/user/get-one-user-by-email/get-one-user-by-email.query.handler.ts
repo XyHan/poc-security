@@ -1,7 +1,7 @@
 import { QueryHandlerInterface } from '../../query-handler.interface';
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { GetOneUserByEmailQuery } from './get-one-user-by-email.query';
 import { GetOneUserByEmailQueryHandlerException } from './get-one-user-by-email.query.handler.exception';
 

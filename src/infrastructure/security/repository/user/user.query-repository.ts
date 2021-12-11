@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { LoggerAdapterService } from '../../logger/logger-adapter.service';
-import { LoggerInterface } from '../../../domain/utils/logger/logger.interface';
-import { UserQueryRepositoryInterface } from '../../../domain/repository/user/user.query-repository.interface';
-import { UserInterface } from '../../../domain/model/user/user.model';
+import { LoggerAdapterService } from '../../../logger/logger-adapter.service';
+import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
+import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserRepository } from './user.repository';
-import { UserRepositoryException } from '../../../domain/repository/user/user.repository.exception';
+import { UserRepositoryException } from '../../../../domain/repository/user/user.repository.exception';
 import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
-import { UserEntity } from '../entity/user.entity';
+import { UserEntity } from '../../entity/user.entity';
 
 @Injectable()
 export class UserQueryRepository implements UserQueryRepositoryInterface {

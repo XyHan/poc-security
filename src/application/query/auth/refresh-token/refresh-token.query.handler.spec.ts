@@ -6,7 +6,7 @@ import { AuthManagerInterface } from '../../../../domain/utils/security/auth-man
 import { UserQueryRepositoryMock } from '../../../../domain/repository/user/mock/user.query-repository.mock';
 import { AuthManagerMock } from '../../../../domain/utils/security/auth-manager.mock';
 import { RefreshTokenQuery } from './refresh-token.query';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { RefreshTokenQueryHandler } from './refresh-token.query.handler';
 
 const EMAIL = 'user1@test.com';

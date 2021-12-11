@@ -37,8 +37,8 @@ $ yarn install
 ```bash
 # development
 $ make run-dev
-# if needed, create a dev user
-$ make create-a-user
+# if needed, create a dev security
+$ make create-a-security
 
 # production mode
 $ yarn run start:prod

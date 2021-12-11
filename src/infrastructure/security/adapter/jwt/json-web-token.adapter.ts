@@ -1,7 +1,7 @@
 import { Algorithm } from 'jsonwebtoken';
 import { Inject, Injectable } from '@nestjs/common';
 import { TokenInterface } from '../../../../domain/model/auth/token.model';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { JwtException } from './jwt.exception';
 
 export interface JwtPayloadInterface {

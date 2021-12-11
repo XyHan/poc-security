@@ -4,7 +4,7 @@ import { UserQueryRepositoryInterface } from '../../../../domain/repository/user
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { LoginQueryHandler } from '../../../../application/query/auth/login/login.query.handler';
 import { AuthService } from '../../service/auth/auth.service';
-import { UserQueryRepository } from '../../repository/user.query-repository';
+import { UserQueryRepository } from '../../repository/user/user.query-repository';
 import { LoggerAdapterService } from '../../../logger/logger-adapter.service';
 
 export const loginQueryHandlerProvider: FactoryProvider = {

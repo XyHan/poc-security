@@ -1,8 +1,3 @@
-// Todo user real roles
-export const roleSuperAdmin = 0;
-export const roleAdmin = 1;
-export const roleUser = 2;
-
 export interface RoleInterface {
   label: string;
 }

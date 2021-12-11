@@ -1,4 +1,4 @@
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
 import { CreateAUserCommand } from './create-a-user.command';
 import { CreateAUserCommandHandler } from './create-a-user.command.handler';
@@ -16,7 +16,7 @@ const EMAIL = 'notme@unknow.com';
 const PASSWORD = 'changeme';
 const ROLES = ['USER'];
 
-describe('create a user handler test', () => {
+describe('create a security handler test', () => {
   const logger: LoggerInterface = new LoggerMock();
   const encrypter: EncrypterInterface = new EncrypterMock();
   let commandRepository: UserCommandRepositoryInterface;
@@ -27,7 +27,7 @@ describe('create a user handler test', () => {
     queryRepository = new UserQueryRepositoryMock();
   })
 
-  it ('create a user success', async () => {
+  it ('create a security success', async () => {
     const command = new CreateAUserCommand(UUID, EMAIL, PASSWORD, UUID, ROLES);
     const handler = new CreateAUserCommandHandler(commandRepository, logger, encrypter);
     await handler.handle(command);
@@ -44,7 +44,7 @@ describe('create a user handler test', () => {
     expect(createdUser.roles[0]).toBe(ROLES[0]);
   });
 
-  it('create a user error', async () => {
+  it('create a security error', async () => {
     const command = new CreateAUserCommand('', '', '', '', []);
     const handler = new CreateAUserCommandHandler(commandRepository, logger, encrypter);
     await expect(handler.handle(command)).rejects.toThrowError(CreateAUserCommandHandlerException);

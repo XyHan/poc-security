@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 import { AuthService } from '../../../infrastructure/security/service/auth/auth.service';
 import { AuthManagerInterface } from '../../../domain/utils/security/auth-manager.interface';
 import { TokenInterface, TokenModel } from '../../../domain/model/auth/token.model';
-import { UserInterface } from '../../../domain/model/user/user.model';
+import { UserInterface } from '../../../domain/model/security/user.model';
 import { RolesValueObject } from '../../../infrastructure/security/value-object/roles.value-object';
 import { Reflector } from '@nestjs/core';
 import { IncomingMessage } from 'http';
@@ -47,9 +47,9 @@ export class AuthGuard implements CanActivate {
 
   private areValidRoles(user: UserInterface,context: ExecutionContext): boolean {
     const entrypointAvailableRoles: string[] = this.reflector.get<string[]>('roles', context.getHandler()) || [];
-    // return user
-    //   && user.roles
-    //   && user.roles.some((role: string) =>
+    // return security
+    //   && security.roles
+    //   && security.roles.some((role: string) =>
     //     RolesValueObject.isValidRole(role) && entrypointAvailableRoles.some((entrypointAvailableRole: string) => entrypointAvailableRole === role)
     //   );
     return true;

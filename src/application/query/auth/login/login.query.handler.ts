@@ -4,7 +4,7 @@ import { LoginQuery } from './login.query';
 import { TokenInterface } from '../../../../domain/model/auth/token.model';
 import { LoginQueryHandlerException } from './login.query.handler.exception';
 import { AuthManagerInterface } from '../../../../domain/utils/security/auth-manager.interface';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
 
 export class LoginQueryHandler implements QueryHandlerInterface {

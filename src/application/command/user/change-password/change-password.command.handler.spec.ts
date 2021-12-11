@@ -6,7 +6,7 @@ import { UserCommandRepositoryMock } from '../../../../domain/repository/user/mo
 import { UserQueryRepositoryMock } from '../../../../domain/repository/user/mock/user.query-repository.mock';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { EncrypterInterface } from '../../../../domain/utils/encrypter/encrypter.interface';
 import { ChangePasswordCommandHandlerException } from './change-password.command.handler.exception';
@@ -14,7 +14,7 @@ import { ChangePasswordCommandHandlerException } from './change-password.command
 const UUID = '0d66db91-4441-4563-967c-797d767c7288';
 const PASSWORD = 'updatedPassword';
 
-describe('change user password handler test', () => {
+describe('change security password handler test', () => {
   const logger: LoggerInterface = new LoggerMock();
   const encrypter: EncrypterInterface = new EncrypterMock();
   let commandRepository: UserCommandRepositoryInterface;
@@ -25,7 +25,7 @@ describe('change user password handler test', () => {
     queryRepository = new UserQueryRepositoryMock();
   })
 
-  it ('change user password success', async () => {
+  it ('change security password success', async () => {
     const user: UserInterface = await queryRepository.findOneByUuid(UUID, []);
     const password: string = user.password;
     const salt: string = user.salt;
@@ -37,7 +37,7 @@ describe('change user password handler test', () => {
     expect(updatedUser.salt.length).toBeGreaterThan(salt.length);
   });
 
-  it('change user password error', async () => {
+  it('change security password error', async () => {
     const command = new ChangePasswordCommand(PASSWORD, UUID, 'wrong-uuid');
     const handler = new ChangePasswordCommandHandler(commandRepository, queryRepository, logger, encrypter);
     await expect(handler.handle(command)).rejects.toThrowError(ChangePasswordCommandHandlerException);

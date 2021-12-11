@@ -1,4 +1,4 @@
-import { UserInterface } from '../../model/user/user.model';
+import { UserInterface } from '../../model/security/user.model';
 import { TokenInterface } from '../../model/auth/token.model';
 
 export interface AuthManagerInterface {

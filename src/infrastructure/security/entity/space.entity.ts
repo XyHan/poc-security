@@ -1,9 +1,9 @@
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { Length } from 'class-validator';
-import { SpaceInterface } from '../../../domain/model/user/space.model';
+import { SpaceInterface } from '../../../domain/model/security/space.model';
 import { UserToSpaceEntity } from './user-to-space.entity';
-import { UserToSpaceInterface } from '../../../domain/model/user/user-to-space.model';
+import { UserToSpaceInterface } from '../../../domain/model/security/user-to-space.model';
 
 @Entity({ name: 'space' })
 export class SpaceEntity implements SpaceInterface {

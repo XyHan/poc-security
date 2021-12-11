@@ -1,12 +1,12 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
-import { SpaceInterface } from '../../../domain/model/user/space.model';
-import { UserToSpaceInterface } from '../../../domain/model/user/user-to-space.model';
-import { UserInterface } from '../../../domain/model/user/user.model';
+import { SpaceInterface } from '../../../domain/model/security/space.model';
+import { UserToSpaceInterface } from '../../../domain/model/security/user-to-space.model';
+import { UserInterface } from '../../../domain/model/security/user.model';
 import { UserEntity } from './user.entity';
 import { SpaceEntity } from './space.entity';
 
-@Entity({ name: 'user-to-space' })
+@Entity({ name: 'security-to-space' })
 export class UserToSpaceEntity implements UserToSpaceInterface {
   @Exclude()
   @PrimaryGeneratedColumn({ name: 'id' }) private id: number;

@@ -5,7 +5,7 @@ import { AuthServiceException } from './auth.service.exception';
 import { AuthManagerInterface } from '../../../../domain/utils/security/auth-manager.interface';
 import { JsonWebTokenAdapter } from '../../adapter/jwt/json-web-token.adapter';
 import { TokenInterface, TokenModel } from '../../../../domain/model/auth/token.model';
-import { UserInterface} from '../../../../domain/model/user/user.model';
+import { UserInterface} from '../../../../domain/model/security/user.model';
 import { IQueryBus, QueryBus } from "@nestjs/cqrs/dist";
 import { DecodedTokenInterface } from '../../../../domain/model/auth/decoded-token.model';
 import { plainToClass } from "class-transformer";

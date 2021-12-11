@@ -2,7 +2,7 @@ import { LoggerInterface } from '../../../../domain/utils/logger/logger.interfac
 import { CommandHandlerInterface } from '../../command-handler.interface';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
 import { CreateAUserCommand } from './create-a-user.command';
-import { UserInterface, UserModel } from '../../../../domain/model/user/user.model';
+import { UserInterface, UserModel } from '../../../../domain/model/security/user.model';
 import { UserFactory } from '../../../../domain/factory/user.factory';
 import { CreateAUserCommandHandlerException } from './create-a-user.command.handler.exception';
 import { EncrypterInterface } from '../../../../domain/utils/encrypter/encrypter.interface';

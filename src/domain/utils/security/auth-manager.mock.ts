@@ -1,5 +1,5 @@
 import { AuthManagerInterface } from './auth-manager.interface';
-import { UserInterface } from '../../model/user/user.model';
+import { UserInterface } from '../../model/security/user.model';
 import { TokenInterface, TokenModel } from '../../model/auth/token.model';
 import { UserFixtures } from '../../fixtures/user.fixtures';
 

@@ -5,7 +5,7 @@ import { LoggerStream } from './logger.stream';
 @Injectable()
 export class LoggerHttpService {
   private readonly httpLogger: morgan;
-  private format = ':remote-addr - :remote-user [:id_request][:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" ":message"';
+  private format = ':remote-addr - :remote-security [:id_request][:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":security-agent" ":message"';
 
   constructor(
     @Inject(LoggerStream) private readonly loggerStream: LoggerStream,

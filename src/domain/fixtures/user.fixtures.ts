@@ -1,4 +1,4 @@
-import { UserInterface, UserModel } from '../model/user/user.model';
+import { UserInterface, UserModel } from '../model/security/user.model';
 import { UserFactory } from '../factory/user.factory';
 
 export const USER_COLLECTION: UserInterface[] = [

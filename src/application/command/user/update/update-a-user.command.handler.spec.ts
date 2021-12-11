@@ -1,4 +1,4 @@
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
@@ -15,7 +15,7 @@ const STATUS = 2;
 const UPDATEDBY = '31dd20e0-zzzz-yyyy-xxxx-d9cc3aff4028';
 const ROLES = ['ADMIN'];
 
-describe('update a user handler test', () => {
+describe('update a security handler test', () => {
   const logger: LoggerInterface = new LoggerMock();
   let commandRepository: UserCommandRepositoryInterface;
   let queryRepository: UserQueryRepositoryInterface;
@@ -25,7 +25,7 @@ describe('update a user handler test', () => {
     queryRepository = new UserQueryRepositoryMock();
   })
 
-  it ('update a user success', async () => {
+  it ('update a security success', async () => {
     const command = new UpdateAUserCommand(UUID, STATUS, EMAIL, UPDATEDBY, ROLES);
     const handler = new UpdateAUserCommandHandler(commandRepository, queryRepository, logger);
     await handler.handle(command);
@@ -35,7 +35,7 @@ describe('update a user handler test', () => {
     expect(updatedUser.updatedBy).toBe(UPDATEDBY);
   });
 
-  it('update a user error', async () => {
+  it('update a security error', async () => {
     const command = new UpdateAUserCommand('', 1, '', '', ROLES);
     const handler = new UpdateAUserCommandHandler(commandRepository, queryRepository, logger);
     await expect(handler.handle(command)).rejects.toThrowError(UpdateAUserCommandHandlerException);

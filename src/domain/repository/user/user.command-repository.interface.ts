@@ -1,4 +1,4 @@
-import { UserInterface } from '../../model/user/user.model';
+import { UserInterface } from '../../model/security/user.model';
 
 export interface UserCommandRepositoryInterface {
   create(user: UserInterface): Promise<UserInterface>;

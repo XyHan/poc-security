@@ -1,7 +1,7 @@
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { CommandHandlerInterface } from '../../command-handler.interface';
 import { UserCommandRepositoryInterface } from '../../../../domain/repository/user/user.command-repository.interface';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { EncrypterInterface } from '../../../../domain/utils/encrypter/encrypter.interface';
 import { UserQueryRepositoryInterface } from '../../../../domain/repository/user/user.query-repository.interface';
 import { ChangePasswordCommand } from './change-password.command';

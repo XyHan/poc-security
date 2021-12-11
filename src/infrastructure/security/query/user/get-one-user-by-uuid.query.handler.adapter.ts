@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs/dist';
 import { Inject } from '@nestjs/common';
 import { GetOneUserByUuidQuery } from '../../../../application/query/user/get-one-user-by-uuid/get-one-user-by-uuid.query';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { QueryHandlerInterface } from '../../../../application/query/query-handler.interface';
 
 @QueryHandler(GetOneUserByUuidQuery)

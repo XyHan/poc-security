@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs/dist';
 import { Inject } from '@nestjs/common';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { GetOneUserByEmailQuery } from '../../../../application/query/user/get-one-user-by-email/get-one-user-by-email.query';
 import { QueryHandlerInterface } from '../../../../application/query/query-handler.interface';
 

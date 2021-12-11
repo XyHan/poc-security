@@ -1,8 +1,8 @@
-import { UserInterface } from '../../../domain/model/user/user.model';
+import { UserInterface } from '../../../domain/model/security/user.model';
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { Length } from 'class-validator';
-import { UserToSpaceInterface } from '../../../domain/model/user/user-to-space.model';
+import { UserToSpaceInterface } from '../../../domain/model/security/user-to-space.model';
 import { UserToSpaceEntity } from './user-to-space.entity';
 
 @Entity({ name: 'user' })

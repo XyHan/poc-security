@@ -2,7 +2,7 @@ import { QueryHandlerInterface } from '../../query-handler.interface';
 import { LoggerInterface } from '../../../../domain/utils/logger/logger.interface';
 import { TokenInterface } from '../../../../domain/model/auth/token.model';
 import { AuthManagerInterface } from '../../../../domain/utils/security/auth-manager.interface';
-import { UserInterface } from '../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../domain/model/security/user.model';
 import { RefreshTokenQuery } from './refresh-token.query';
 import { RefreshTokenQueryHandlerException } from './refresh-token.query.handler.exception';
 

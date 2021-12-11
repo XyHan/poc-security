@@ -1,5 +1,5 @@
 import { UserQueryRepositoryInterface } from '../user.query-repository.interface';
-import { UserInterface } from '../../../model/user/user.model';
+import { UserInterface } from '../../../model/security/user.model';
 import { UserRepositoryException } from '../user.repository.exception';
 import { UserFixtures } from '../../../fixtures/user.fixtures';
 

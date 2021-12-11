@@ -1,5 +1,5 @@
 import { createParamDecorator } from '@nestjs/common';
-import { UserInterface } from '../../../domain/model/user/user.model';
+import { UserInterface } from '../../../domain/model/security/user.model';
 import { plainToClass } from 'class-transformer';
 import { UserEntity } from '../entity/user.entity';
 import { SecurityModule } from '../security.module';

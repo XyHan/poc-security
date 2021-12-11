@@ -5,8 +5,8 @@ import { LoggerMock } from '../../../../../../domain/utils/logger/logger.mock';
 import { LoggerAdapterService } from '../../../../../../infrastructure/logger/logger-adapter.service';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UserQueryRepositoryMock } from '../../../../../../domain/repository/user/mock/user.query-repository.mock';
-import { UserQueryRepository } from '../../../../../../infrastructure/security/repository/user.query-repository';
-import { UserCommandRepository } from '../../../../../../infrastructure/security/repository/user.command-repository';
+import { UserQueryRepository } from '../../../../../../infrastructure/security/repository/user/user.query-repository';
+import { UserCommandRepository } from '../../../../../../infrastructure/security/repository/user/user.command-repository';
 import { UserCommandRepositoryMock } from '../../../../../../domain/repository/user/mock/user.command-repository.mock';
 import { AppModule } from '../../../../../../infrastructure/app/app.module';
 import { UiHttpModule } from '../../../../ui-http.module';
@@ -52,7 +52,7 @@ describe('AuthController tests suite', () => {
     expect(response.body.token).toContain('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.');
   });
 
-  it('POST - should return 400 bad user', async () => {
+  it('POST - should return 400 bad security', async () => {
     const response = await request(app.getHttpServer()).post('/login').send({
       email: 'bad-email',
       password: PASSWORD,

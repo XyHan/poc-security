@@ -16,7 +16,7 @@ import { v4 } from 'uuid';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from '../../../base.controller';
 import { CreateAUserDto } from '../../dto/create-a-user.dto';
-import { UserInterface } from '../../../../../../domain/model/user/user.model';
+import { UserInterface } from '../../../../../../domain/model/security/user.model';
 import { CreateAUserCommand } from '../../../../../../application/command/user/create/create-a-user.command';
 import { DeleteAUserCommand } from '../../../../../../application/command/user/delete/delete-a-user.command';
 import { UpdateAUserCommand } from '../../../../../../application/command/user/update/update-a-user.command';

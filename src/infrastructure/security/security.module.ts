@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { LoggerModule } from '../logger/logger.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserRepository } from './repository/user.repository';
-import { UserQueryRepository } from './repository/user.query-repository';
-import { UserCommandRepository } from './repository/user.command-repository';
+import { UserRepository } from './repository/user/user.repository';
+import { UserQueryRepository } from './repository/user/user.query-repository';
+import { UserCommandRepository } from './repository/user/user.command-repository';
 import { UserQueryHandlers } from './query/user';
 import { UserCommandHandlers } from './command';
 import { BcryptAdapter } from './adapter/bcrypt.adapter';
@@ -20,11 +20,14 @@ import { deleteAUserCommandHandlerProvider } from './provider/command/delete-a-u
 import { refreshTokenQueryHandlerProvider } from './provider/query/refresh-token-query-handler.provider';
 import { jwtProvider } from './provider/utils/jwt.provider';
 import { bcryptProvider } from './provider/utils/bcrypt.provider';
+import { SpaceQueryRepository } from './repository/space/space.query-repository';
+import { SpaceCommandRepository } from './repository/space/space.command-repository';
+import { SpaceRepository } from './repository/space/space.repository';
 
 @Module({
   imports: [
     CqrsModule,
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([UserRepository, SpaceRepository]),
     LoggerModule,
   ],
   providers: [
@@ -44,11 +47,15 @@ import { bcryptProvider } from './provider/utils/bcrypt.provider';
     loginQueryHandlerProvider,
     refreshTokenQueryHandlerProvider,
     jwtProvider,
-    bcryptProvider
+    bcryptProvider,
+    SpaceQueryRepository,
+    SpaceCommandRepository,
   ],
   exports: [
     UserQueryRepository,
     UserCommandRepository,
+    SpaceQueryRepository,
+    SpaceCommandRepository,
     AuthService
   ]
 })
