@@ -7,7 +7,7 @@ export class GetOneUserByEmailQuery implements QueryInterface {
 
   constructor(email: string) {
     this._email = email;
-    this._name = 'get-one-security-by-email-query';
+    this._name = 'get-one-user-by-email-query';
     this._version = 1.0;
   }
 

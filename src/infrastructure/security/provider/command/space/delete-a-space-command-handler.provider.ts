@@ -8,7 +8,7 @@ import { SpaceQueryRepositoryInterface } from '../../../../../domain/repository/
 import { DeleteASpaceCommandHandler } from '../../../../../application/command/space/delete/delete-a-space.command.handler';
 
 export const deleteASpaceCommandHandlerProvider: FactoryProvider = {
-  provide: 'DELETE_A_USER_COMMAND_HANDLER',
+  provide: 'DELETE_A_SPACE_COMMAND_HANDLER',
   useFactory: (
     spaceCommandRepository: SpaceCommandRepositoryInterface,
     spaceQueryRepository: SpaceQueryRepositoryInterface,

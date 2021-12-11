@@ -6,7 +6,7 @@ import { UserInterface } from '../../../domain/model/security/user.model';
 import { UserEntity } from './user.entity';
 import { SpaceEntity } from './space.entity';
 
-@Entity({ name: 'security-to-space' })
+@Entity({ name: 'user-to-space' })
 export class UserToSpaceEntity implements UserToSpaceInterface {
   @Exclude()
   @PrimaryGeneratedColumn({ name: 'id' }) private id: number;

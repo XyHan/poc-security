@@ -9,7 +9,7 @@ export class GetOneUserByUuidQuery implements QueryInterface {
   constructor(uuid: string, sources: string[]) {
     this._uuid = uuid;
     this._sources = sources;
-    this._name = 'get-one-security-by-uuid-query';
+    this._name = 'get-one-user-by-uuid-query';
     this._version = 1.0;
   }
 

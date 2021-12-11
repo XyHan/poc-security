@@ -66,6 +66,7 @@ describe('UserController tests suite', () => {
     const response = await request(app.getHttpServer()).post('/users').send({
       email: EMAIL,
       password: PASSWORD,
+      roles: ['ADMIN'],
     });
     expect(response.status).toBe(201);
     expect(response.body.email).toBe(EMAIL);

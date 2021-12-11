@@ -47,11 +47,11 @@ export class AuthGuard implements CanActivate {
 
   private areValidRoles(user: UserInterface,context: ExecutionContext): boolean {
     const entrypointAvailableRoles: string[] = this.reflector.get<string[]>('roles', context.getHandler()) || [];
-    // return security
-    //   && security.roles
-    //   && security.roles.some((role: string) =>
-    //     RolesValueObject.isValidRole(role) && entrypointAvailableRoles.some((entrypointAvailableRole: string) => entrypointAvailableRole === role)
-    //   );
-    return true;
+    return user
+      && user.roles
+      && user.roles.some((role: string) =>
+        RolesValueObject.isValidRole(role)
+            && entrypointAvailableRoles.some((entrypointAvailableRole: string) => entrypointAvailableRole === role)
+      );
   }
 }
