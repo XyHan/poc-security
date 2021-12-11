@@ -36,7 +36,7 @@ export class SpaceQueryRepository implements SpaceQueryRepositoryInterface {
   }
 
 
-  public async findOneByObjectableUuid(objectableUuid: string): Promise<SpaceInterface | null> {
+  public async findOneByObjectableUuid(objectableUuid: string, sources: string[]): Promise<SpaceInterface | null> {
     try {
       return await this.repository.findOneOrFail({ objectableUuid });
     } catch (e) {
