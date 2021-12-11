@@ -32,5 +32,5 @@ run-dev:
 create-user:
 	curl -H "Content-Type: application/json" \
       -X POST \
-      -d '{"email":"dev@tellmewhat.com","password":"12345"}' \
+      -d '{"email":"dev@test.com","password":"12345"}' \
       http://127.0.0.1:3000/users
