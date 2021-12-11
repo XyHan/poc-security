@@ -34,7 +34,7 @@ export class SpaceEntity implements SpaceInterface {
   @Column({ type: 'integer', name: 'objectable_type', nullable: false }) public objectableType: number;
 
   @Expose()
-  @Column({ type: 'integer', name: 'objectable_uuid', nullable: true }) public objectableUuid: string;
+  @Column({ type: 'varchar', length: 38, name: 'objectable_uuid', nullable: true }) public objectableUuid: string;
 
   @Expose()
   @OneToMany(() => UserToSpaceEntity, userToSpace => userToSpace.space)

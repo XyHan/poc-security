@@ -54,7 +54,7 @@ export class UserController extends BaseController {
         createAUserDto.email,
         createAUserDto.password,
         uuid,
-        [RolesValueObject.availableUserRoles[2]]
+        createAUserDto.roles
       );
       await this._commandBus.execute(command);
       return await this.findOneUserByUuid(uuid);
