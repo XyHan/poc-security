@@ -42,6 +42,9 @@ export class UserEntity implements UserInterface {
   @Column({ type: 'integer', name: 'status', nullable: false }) public status: number;
 
   @Expose()
+  @Column({ type: 'simple-array', name: 'roles', nullable: false }) public roles: string[];
+
+  @Expose()
   @OneToMany(() => UserToSpaceEntity, userToSpace => userToSpace.user)
   public userToSpace: UserToSpaceInterface[];
 }

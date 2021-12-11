@@ -15,12 +15,12 @@ import { LoggerInterface } from '../../../../../../domain/utils/logger/logger.in
 import { v4 } from 'uuid';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from '../../../base.controller';
-import { CreateAUserDto } from '../../dto/create-a-user.dto';
+import { CreateAUserDto } from '../../dto/user/create-a-user.dto';
 import { UserInterface } from '../../../../../../domain/model/security/user.model';
 import { CreateAUserCommand } from '../../../../../../application/command/user/create/create-a-user.command';
 import { DeleteAUserCommand } from '../../../../../../application/command/user/delete/delete-a-user.command';
 import { UpdateAUserCommand } from '../../../../../../application/command/user/update/update-a-user.command';
-import { UpdateAUserDto } from '../../dto/update-a-user.dto';
+import { UpdateAUserDto } from '../../dto/user/update-a-user.dto';
 import { GetOneUserByUuidQuery } from '../../../../../../application/query/user/get-one-user-by-uuid/get-one-user-by-uuid.query';
 import { UserEntity } from '../../../../../../infrastructure/security/entity/user.entity';
 import { AuthGuard } from '../../../../guard/auth.guard';
@@ -46,7 +46,7 @@ export class UserController extends BaseController {
 
   @Post('/')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public async post(@Body() createAUserDto: CreateAUserDto): Promise<UserInterface> {
+  public async createAnUser(@Body() createAUserDto: CreateAUserDto): Promise<UserInterface> {
     try {
       const uuid: string = v4();
       const command = new CreateAUserCommand(
@@ -68,7 +68,7 @@ export class UserController extends BaseController {
   @UseGuards(AuthGuard)
   @Roles('ADMIN', 'SUPER_ADMIN')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public async put(
+  public async updateAnUser(
     @Body() updateAUserDto: UpdateAUserDto,
     @Param('uuid') uuid: string,
     @CurrentUser() user: UserInterface,
@@ -92,7 +92,7 @@ export class UserController extends BaseController {
   @Delete('/:uuid')
   @UseGuards(AuthGuard)
   @Roles('ADMIN', 'SUPER_ADMIN')
-  public async delete(
+  public async deleteAnUser(
     @Param('uuid') uuid: string,
     @CurrentUser() user: UserInterface
   ): Promise<UserInterface> {

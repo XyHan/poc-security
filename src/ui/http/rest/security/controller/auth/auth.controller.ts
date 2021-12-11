@@ -13,7 +13,7 @@ import { LoggerAdapterService } from '../../../../../../infrastructure/logger/lo
 import { BaseController } from '../../../base.controller';
 import { TokenInterface, TokenModel } from '../../../../../../domain/model/auth/token.model';
 import { LoginQuery } from '../../../../../../application/query/auth/login/login.query';
-import { LoginDto } from '../../dto/login.dto';
+import { LoginDto } from '../../dto/auth/login.dto';
 import { plainToClass } from 'class-transformer';
 import { TokenTransformer } from '../../../../../../infrastructure/security/transformer/token.transformer';
 import { IncomingMessage } from 'http';

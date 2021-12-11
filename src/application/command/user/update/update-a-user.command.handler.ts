@@ -41,7 +41,8 @@ export class UpdateAUserCommandHandler implements CommandHandlerInterface {
         user.createdAt,
         user.createdBy,
         new Date(),
-        command.updatedBy
+        command.updatedBy,
+        command.roles,
       );
     } catch (e) {
       const message: string = `UpdateAUserCommandHandler - updateUserFromCommand - User update error: ${e.message}`;

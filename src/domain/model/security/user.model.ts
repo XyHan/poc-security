@@ -8,6 +8,7 @@ export interface UserInterface {
   createdBy: string;
   updatedAt: Date;
   updatedBy: string;
+  roles: string[];
 }
 
 export class UserModel implements UserInterface {
@@ -20,6 +21,7 @@ export class UserModel implements UserInterface {
   protected _updatedAt: Date;
   protected _updatedBy: string;
   protected _status: number;
+  private _roles: string[];
 
   get email(): string {
     return this._email;
@@ -91,5 +93,13 @@ export class UserModel implements UserInterface {
 
   set status(value: number) {
     this._status = value;
+  }
+
+  get roles(): string[] {
+    return this._roles;
+  }
+
+  set roles(value: string[]) {
+    this._roles = value;
   }
 }
