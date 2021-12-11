@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs/dist';
 import { Inject } from '@nestjs/common';
-import { CreateAUserCommand } from '../../../application/command/user/create/create-a-user.command';
-import { CommandHandlerInterface } from '../../../application/command/command-handler.interface';
+import { CreateAUserCommand } from '../../../../application/command/user/create/create-a-user.command';
+import { CommandHandlerInterface } from '../../../../application/command/command-handler.interface';
 
 @CommandHandler(CreateAUserCommand)
 export class CreateAUserCommandHandlerAdapter implements ICommandHandler {
