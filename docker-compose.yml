@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    build: ./docker/mysql
+    container_name: "tellmewhat-mysql"
+    hostname: "tellmewhat-mysql"
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: "toor"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./var/mysql:/var/lib/mysql"
+    networks:
+      - "default"
+
+networks:
+  default:
+    driver: "bridge"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.10.0.0/24
