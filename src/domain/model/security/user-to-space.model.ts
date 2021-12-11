@@ -6,6 +6,7 @@ export interface UserToSpaceInterface {
   space: SpaceInterface;
   createdAt: Date;
   createdBy: string;
+  permissions: string[];
 }
 
 export class UserToSpaceModel implements UserToSpaceInterface {
@@ -13,8 +14,7 @@ export class UserToSpaceModel implements UserToSpaceInterface {
   protected _space: SpaceInterface;
   protected _createdAt: Date;
   protected _createdBy: string;
-  protected _updatedAt: Date;
-  protected _updatedBy: string;
+  private _permissions: string[];
 
   get user(): UserInterface {
     return this._user;
@@ -48,19 +48,11 @@ export class UserToSpaceModel implements UserToSpaceInterface {
     this._createdBy = value;
   }
 
-  get updatedAt(): Date {
-    return this._updatedAt;
+  get permissions(): string[] {
+    return this._permissions;
   }
 
-  set updatedAt(value: Date) {
-    this._updatedAt = value;
-  }
-
-  get updatedBy(): string {
-    return this._updatedBy;
-  }
-
-  set updatedBy(value: string) {
-    this._updatedBy = value;
+  set permissions(value: string[]) {
+    this._permissions = value;
   }
 }

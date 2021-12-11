@@ -26,11 +26,5 @@ export class UserToSpaceEntity implements UserToSpaceInterface {
   @Column({ type: 'varchar', length: 38, name: 'created_by', nullable: false }) public createdBy: string;
 
   @Expose()
-  @Column({ type: 'datetime', name: 'updated_at', nullable: false }) public updatedAt: Date;
-
-  @Expose()
-  @Column({ type: 'varchar', length: 38, name: 'updated_by', nullable: false }) public updatedBy: string;
-
-  @Expose()
-  @Column({ type: 'simple-array', name: 'roles', nullable: false }) public roles: number[];
+  @Column({ type: 'simple-array', name: 'permissions', nullable: false }) public permissions: string[];
 }
