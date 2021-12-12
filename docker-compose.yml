@@ -3,8 +3,8 @@ version: '3'
 services:
   db:
     build: ./docker/mysql
-    container_name: "tellmewhat-mysql"
-    hostname: "tellmewhat-mysql"
+    container_name: "poc-security-mysql"
+    hostname: "poc-security-mysql"
     restart: "no"
     environment:
       MYSQL_ROOT_PASSWORD: "toor"

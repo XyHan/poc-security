@@ -39,13 +39,13 @@ export class UnbindUserToSpaceCommandHandler implements CommandHandlerInterface 
     const user: UserInterface = await this.findOneUserByUuidOrException(command.userUuid);
     const space: SpaceInterface = await this.findOneSpaceByUuidOrException(command.spaceUuid);
     const userToSpaceBinding = await this.findOneUserToSpaceByUserUuidAndSpaceUuidOrException(user, space);
-    await this.unbindUserToSpace(userToSpaceBinding);
+    await this.unbindUserToSpace(command, userToSpaceBinding);
   }
 
-  private async unbindUserToSpace(userToSpace: UserToSpaceInterface): Promise<void> {
+  private async unbindUserToSpace(command: UnbindUserToSpaceCommand, userToSpace: UserToSpaceInterface): Promise<void> {
     try {
       await this._commandRepository.delete(userToSpace);
-      this._logger.info(`BindUserToSpaceCommandHandler - BindUserToSpace user ${userToSpace.user.uuid} and space ${userToSpace.space.uuid} are now bound`);
+      this._logger.info(`BindUserToSpaceCommandHandler - BindUserToSpace user ${command.userUuid} and space ${command.spaceUuid} are now unbound`);
     } catch (e) {
       const message: string = `BindUserToSpaceCommandHandler - bindUserToSpace - user ${userToSpace.user.uuid} | space ${userToSpace.space.uuid}. Error: ${e.message}`;
       this._logger.error(message);

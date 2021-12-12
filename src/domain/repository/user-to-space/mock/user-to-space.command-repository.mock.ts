@@ -15,10 +15,10 @@ export class UserToSpaceCommandRepositoryMock implements UserToSpaceCommandRepos
     }
   }
 
-  public async delete(userToSpace: UserToSpaceInterface): Promise<UserToSpaceInterface> {
+  public async delete(userToSpace: UserToSpaceInterface): Promise<void> {
     try {
       UserToSpaceFixtures.deleteUserToSpace(userToSpace);
-      return Promise.resolve(userToSpace);
+      return Promise.resolve();
     } catch (e) {
       const message: string = `UserToSpaceCommandRepository - Error on delete userToSpace '${userToSpace.user.uuid}'`;
       throw new UserToSpaceRepositoryException(message);

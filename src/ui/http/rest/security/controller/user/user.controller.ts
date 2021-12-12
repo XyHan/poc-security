@@ -46,7 +46,7 @@ export class UserController extends BaseController {
 
   @Post('/')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public async createAnUser(@Body() createAUserDto: CreateAUserDto): Promise<UserInterface> {
+  public async createAUser(@Body() createAUserDto: CreateAUserDto): Promise<UserInterface> {
     try {
       const uuid: string = v4();
       const command = new CreateAUserCommand(
@@ -68,7 +68,7 @@ export class UserController extends BaseController {
   @UseGuards(AuthGuard)
   @Roles('ADMIN', 'SUPER_ADMIN')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public async updateAnUser(
+  public async updateAUser(
     @Body() updateAUserDto: UpdateAUserDto,
     @Param('uuid') uuid: string,
     @CurrentUser() user: UserInterface,
@@ -92,7 +92,7 @@ export class UserController extends BaseController {
   @Delete('/:uuid')
   @UseGuards(AuthGuard)
   @Roles('ADMIN', 'SUPER_ADMIN')
-  public async deleteAnUser(
+  public async deleteAUser(
     @Param('uuid') uuid: string,
     @CurrentUser() user: UserInterface
   ): Promise<UserInterface> {

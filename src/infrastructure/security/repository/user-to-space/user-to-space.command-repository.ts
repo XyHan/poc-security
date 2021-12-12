@@ -32,9 +32,9 @@ export class UserToSpaceCommandRepository implements UserToSpaceCommandRepositor
     }
   }
 
-  public async delete(userToSpace: UserToSpaceEntity): Promise<UserToSpaceInterface> {
+  public async delete(userToSpace: UserToSpaceEntity): Promise<void> {
     try {
-      return await this.repository.remove(userToSpace);
+      await this.repository.remove(userToSpace);
     } catch (e) {
       const message: string = `UserToSpaceCommandRepository - Error on delete userToSpace '${userToSpace.user.uuid}' | '${userToSpace.space.uuid}': ${e.message}`;
       this._logger.error(message);

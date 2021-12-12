@@ -1,4 +1,4 @@
-DOCKER = docker-compose -f ./docker-compose.yml -p tellmewhat
+DOCKER = docker-compose -f ./docker-compose.yml -p poc-security
 
 .PHONY: start
 start: erase build up
@@ -27,6 +27,11 @@ run:
 .PHONY: run-dev
 run-dev:
 	npm run start:dev
+
+.PHONY: build-db
+build-db:
+	docker exec -i poc-security-mysql mysql -u root -ptoor -e "CREATE DATABASE IF NOT EXISTS security"
+	docker exec -i poc-security-mysql mysql -u root -ptoor -D security < ./docker/mysql/security.sql
 
 .PHONY: create-user
 create-user:

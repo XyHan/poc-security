@@ -29,31 +29,78 @@ Poc Security API
 ## Installation
 
 ```bash
-$ yarn install
+$ npm install
 ```
 
 ## Running the app
 
 ```bash
-# development
+# build docker image
+$ make start
+
+# if needed, import the database
+$ make build-db
+
+# development mode
 $ make run-dev
-# if needed, create a dev security
-$ make create-a-security
 
 # production mode
-$ yarn run start:prod
+$ npm run start:prod
+```
+
+## Get a token
+
+```bash
+# credentials auth
+$ curl -H "Content-Type: application/json" -X POST -d '{"email":"dev@dev.com","password":"12345"}' http://127.0.0.1:3000/login
+```
+
+## Basic user management
+```bash
+# create a user (change credentials to yours)
+$ curl -H "Content-Type: application/json" -X POST -d '{"email":"dev@dev.com","password":"12345","roles":["SUPER_ADMIN"]}' http://127.0.0.1:3000/users
+  
+# update a user (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X PUT -d '{"email":"dev@dev.com","status":0,"roles":["SUPER_ADMIN"]}' http://127.0.0.1:3000/users/f2239ae3-d262-452d-9cd9-5741890fba9b
+
+# delete a user (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X DELETE http://127.0.0.1:3000/users/f2239ae3-d262-452d-9cd9-5741890fba9b
+```
+
+## Basic space management
+```bash
+# create a space (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X POST -d '{"objectableType":3,"objectableUuid":"9999c07c-06c5-453e-bf67-5fa09b9eb480"}' http://127.0.0.1:3000/spaces
+  
+# delete a space (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X DELETE http://127.0.0.1:3000/spaces/fb2f1bba-3d0e-4f8d-a6a8-fdad2219ce1e
+```
+
+## Bind and unbind a user to a space
+```bash
+# bind a user to a space (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X POST -d '{"permissions":["USER"]}' http://127.0.0.1:3000/user/f2239ae3-d262-452d-9cd9-5741890fba9b/space/fb2f1bba-3d0e-4f8d-a6a8-fdad2219ce1e
+  
+# unbind a user to a space (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X DELETE http://127.0.0.1:3000/user/f2239ae3-d262-452d-9cd9-5741890fba9b/space/83ae7ade-42db-4cd8-8f0f-2a1c15ab9a1d
+```
+
+## Get user with spaces
+```bash
+# get one user by uuid (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X GET http://127.0.0.1:3000/users/f2239ae3-d262-452d-9cd9-5741890fba9b
+
+# get my user (change bearer for a working one)
+$ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X GET http://127.0.0.1:3000/users
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ yarn run test
-
-# test coverage
-$ yarn run test:cov
+$ npm run test
 ```
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Nest and this POC are [MIT licensed](LICENSE).
