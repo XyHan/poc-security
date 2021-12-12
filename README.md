@@ -91,10 +91,7 @@ $ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJ
 $ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjIyMzlhZTMtZDI2Mi00NTJkLTljZDktNTc0MTg5MGZiYTliIiwiZW1haWwiOiJkZXZAZGV2LmNvbSIsImlhdCI6MTYzOTMwNDUzNywiZXhwIjoxNjM5MzkwOTM3fQ.YdZWcP6eJLKRwcA_LtditysS9cC9R7VrVQ8w-Duh0EI" -X GET http://127.0.0.1:3000/users/f2239ae3-d262-452d-9cd9-5741890fba9b
 
 {
-    "id": 2,
     "email": "dev@dev.com",
-    "password": "$2b$10$eQFf5lP7FHCblmpZAfLR9eMS4ujRH0DN39ayp5d.jCbsdOubLpnzi",
-    "salt": "$2b$10$eQFf5lP7FHCblmpZAfLR9e",
     "createdAt": "2021-12-11T16:47:07.000Z",
     "createdBy": "f2239ae3-d262-452d-9cd9-5741890fba9b",
     "updatedAt": "2021-12-11T16:47:07.000Z",
@@ -106,14 +103,7 @@ $ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJ
     ],
     "userSpaces": [
         {
-            "id": 1,
-            "createdAt": "2021-12-11T19:52:52.000Z",
-            "createdBy": "f2239ae3-d262-452d-9cd9-5741890fba9b",
-            "permissions": [
-                "ADMIN"
-            ],
             "space": {
-                "id": 3,
                 "uuid": "83ae7ade-42db-4cd8-8f0f-2a1c15ab9a1d",
                 "createdAt": "2021-12-11T16:59:07.000Z",
                 "createdBy": "f2239ae3-d262-452d-9cd9-5741890fba9b",
@@ -122,7 +112,12 @@ $ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJ
                 "status": 1,
                 "objectableType": 2,
                 "objectableUuid": "799e3ce3-645a-4097-a58d-a6638dd83840"
-            }
+            },
+            "createdAt": "2021-12-11T19:52:52.000Z",
+            "createdBy": "f2239ae3-d262-452d-9cd9-5741890fba9b",
+            "permissions": [
+                "ADMIN"
+            ]
         }
     ]
 }
