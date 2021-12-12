@@ -5,8 +5,12 @@ import { UserQueryRepositoryInterface } from '../../../../domain/repository/user
 import { UserInterface } from '../../../../domain/model/security/user.model';
 import { UserRepository } from './user.repository';
 import { UserRepositoryException } from '../../../../domain/repository/user/user.repository.exception';
-import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 import { UserEntity } from '../../entity/user.entity';
+import { plainToClass } from 'class-transformer';
+
+const USER_ALIAS = 'user';
+const USER_TO_SPACE_ALIAS = 'userToSpace';
+const SPACE_ALIAS = 'space';
 
 @Injectable()
 export class UserQueryRepository implements UserQueryRepositoryInterface {
@@ -21,14 +25,21 @@ export class UserQueryRepository implements UserQueryRepositoryInterface {
 
   public async findOneByUuid(uuid: string, sources: any[]): Promise<UserInterface | null> {
     try {
-      let options: FindOneOptions<UserEntity> = {};
-      if (sources && sources.length) { options.select = sources; }
-      return await this.repository
-          .createQueryBuilder('user')
-          .leftJoinAndSelect('user.userSpaces', 'userToSpace')
-          .leftJoinAndSelect('userToSpace.space', 'space')
-          .where({ uuid })
-          .getOneOrFail()
+      const query = this.repository.createQueryBuilder(USER_ALIAS);
+
+      if (sources && sources.length) {
+        sources.map((source: string) => `${USER_ALIAS}.${source}`);
+        query.select(sources.join(','));
+      }
+
+      const user: UserInterface = await query
+        .leftJoinAndSelect(`${USER_ALIAS}.userSpaces`, USER_TO_SPACE_ALIAS)
+        .leftJoinAndSelect(`${USER_TO_SPACE_ALIAS}.space`, SPACE_ALIAS)
+        .where({ uuid })
+        .getOneOrFail()
+      ;
+
+      return plainToClass(UserEntity, user, { strategy: 'excludeAll', excludeExtraneousValues: true });
     } catch (e) {
       if (e.name === 'EntityNotFound') {
         this._logger.warn(`UserQueryRepository - findOneByUuid - User ${uuid} not found`);
@@ -43,7 +54,8 @@ export class UserQueryRepository implements UserQueryRepositoryInterface {
 
   public async findOneByEmail(email: string): Promise<UserInterface | null> {
     try {
-      return await this.repository.findOneOrFail({ email });
+      const user: UserInterface = await this.repository.findOneOrFail({ email });
+      return plainToClass(UserEntity, user, { strategy: 'excludeAll', excludeExtraneousValues: true });
     } catch (e) {
       if (e.name === 'EntityNotFound') {
         this._logger.warn(`UserQueryRepository - findOneByEmail - User ${email} not found`);

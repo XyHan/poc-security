@@ -14,7 +14,6 @@ import { CommandBus, ICommandBus, IQueryBus, QueryBus } from '@nestjs/cqrs';
 import { LoggerAdapterService } from '../../../../../../infrastructure/logger/logger-adapter.service';
 import { LoggerInterface } from '../../../../../../domain/utils/logger/logger.interface';
 import { v4 } from 'uuid';
-import { plainToClass } from 'class-transformer';
 import { BaseController } from '../../../base.controller';
 import { CreateAUserDto } from '../../dto/user/create-a-user.dto';
 import { UserInterface } from '../../../../../../domain/model/security/user.model';
@@ -23,7 +22,6 @@ import { DeleteAUserCommand } from '../../../../../../application/command/user/d
 import { UpdateAUserCommand } from '../../../../../../application/command/user/update/update-a-user.command';
 import { UpdateAUserDto } from '../../dto/user/update-a-user.dto';
 import { GetOneUserByUuidQuery } from '../../../../../../application/query/user/get-one-user-by-uuid/get-one-user-by-uuid.query';
-import { UserEntity } from '../../../../../../infrastructure/security/entity/user.entity';
 import { AuthGuard } from '../../../../guard/auth.guard';
 import { CurrentUser } from '../../../../../../infrastructure/security/decorator/current-user.decorator';
 import { Roles } from '../../../../../../infrastructure/security/decorator/role.decorator';
@@ -47,8 +45,8 @@ export class UserController extends BaseController {
   @Post('/')
   @UsePipes(new ValidationPipe({ transform: true }))
   public async createAUser(@Body() createAUserDto: CreateAUserDto): Promise<UserInterface> {
+    const uuid: string = v4();
     try {
-      const uuid: string = v4();
       const command = new CreateAUserCommand(
         uuid,
         createAUserDto.email,
@@ -57,11 +55,11 @@ export class UserController extends BaseController {
         createAUserDto.roles
       );
       await this._commandBus.execute(command);
-      return await this.findOneUserByUuid(uuid);
     } catch (e) {
-      const message: string = `UserController - Add user error: ${e.message}`;
+      const message: string = `Add user error: ${e.message}`;
       this.http400Response(message);
     }
+    return await this.findOneUserByUuid(uuid);
   }
 
   @Put('/:uuid')
@@ -82,11 +80,11 @@ export class UserController extends BaseController {
         updateAUserDto.roles
       );
       await this._commandBus.execute(command);
-      return await this.findOneUserByUuid(uuid);
     } catch (e) {
-      const message: string = `UserController - Update ${uuid} user error: ${e.message}`;
+      const message: string = `Update ${uuid} user error: ${e.message}`;
       this.http400Response(message);
     }
+    return await this.findOneUserByUuid(uuid);
   }
 
   @Delete('/:uuid')
@@ -99,37 +97,25 @@ export class UserController extends BaseController {
     try {
       const command = new DeleteAUserCommand(uuid, user.uuid);
       await this._commandBus.execute(command);
-      return await this.findOneUserByUuid(uuid);
     } catch (e) {
-      const message: string = `UserController - Delete user ${uuid} error: ${e.message}`;
+      const message: string = `Delete user ${uuid} error: ${e.message}`;
       this.http400Response(message);
     }
+    return await this.findOneUserByUuid(uuid);
   }
 
   @Get('/:uuid')
   @UseGuards(AuthGuard)
   @Roles('ADMIN', 'SUPER_ADMIN')
   public async getOneUser(@Param('uuid') uuid: string): Promise<UserInterface> {
-    try {
-      const query = new GetOneUserByUuidQuery(uuid, []);
-      return await this._queryBus.execute(query);
-    } catch (e) {
-      const message: string = `UserController - getOneUser ${uuid} user error: ${e.message}`;
-      this.http400Response(message);
-    }
+    return await this.findOneUserByUuid(uuid);
   }
 
   @Get('/')
   @UseGuards(AuthGuard)
   @Roles('ADMIN', 'SUPER_ADMIN')
   public async getMyUser(@CurrentUser() user: UserInterface): Promise<UserInterface> {
-    try {
-      const query = new GetOneUserByUuidQuery(user.uuid, []);
-      return await this._queryBus.execute(query);
-    } catch (e) {
-      const message: string = `UserController - getMyUser ${user.uuid} user error: ${e.message}`;
-      this.http400Response(message);
-    }
+    return await this.findOneUserByUuid(user.uuid);
   }
 
   private async findOneUserByUuid(uuid: string, nullable: boolean = false): Promise<UserInterface | null> {
@@ -138,14 +124,13 @@ export class UserController extends BaseController {
       const query = new GetOneUserByUuidQuery(uuid, []);
       user = await this._queryBus.execute(query);
     } catch (e) {
-      const message: string = ` UserController - findOneUserByUuid ${uuid} error. Previous: ${e.message}`;
+      const message: string = `findOneUserByUuid ${uuid} error. Previous: ${e.message}`;
       this.http400Response(message);
     }
     if (!user && !nullable) {
-      const message: string = ` UserController - User ${uuid} not found`;
+      const message: string = `User ${uuid} not found`;
       this.http404Response(message);
     }
-
-    return plainToClass(UserEntity, user);
+    return user;
   }
 }

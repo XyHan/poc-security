@@ -5,8 +5,8 @@ import { SpaceQueryRepositoryInterface } from '../../../../domain/repository/spa
 import { SpaceInterface } from '../../../../domain/model/security/space.model';
 import { SpaceRepository } from './space.repository';
 import { SpaceRepositoryException } from '../../../../domain/repository/space/space.repository.exception';
-import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 import { SpaceEntity } from '../../entity/space.entity';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class SpaceQueryRepository implements SpaceQueryRepositoryInterface {
@@ -21,9 +21,8 @@ export class SpaceQueryRepository implements SpaceQueryRepositoryInterface {
 
   public async findOneByUuid(uuid: string, sources: any[]): Promise<SpaceInterface | null> {
     try {
-      let options: FindOneOptions<SpaceEntity> = {};
-      if (sources && sources.length) { options.select = sources; }
-      return await this.repository.findOneOrFail({ uuid }, options);
+      const space: SpaceInterface = await this.repository.findOneOrFail({ uuid });
+      return plainToClass(SpaceEntity, space, { strategy: 'excludeAll', excludeExtraneousValues: true });
     } catch (e) {
       if (e.name === 'EntityNotFound') {
         this._logger.warn(`SpaceQueryRepository - findOneByUuid - Space ${uuid} not found`);
@@ -38,7 +37,8 @@ export class SpaceQueryRepository implements SpaceQueryRepositoryInterface {
 
   public async findOneByObjectableUuid(objectableUuid: string, sources: string[]): Promise<SpaceInterface | null> {
     try {
-      return await this.repository.findOneOrFail({ objectableUuid });
+      const space: SpaceInterface = await this.repository.findOneOrFail({ objectableUuid });
+      return plainToClass(SpaceEntity, space, { strategy: 'excludeAll', excludeExtraneousValues: true });
     } catch (e) {
       if (e.name === 'EntityNotFound') {
         this._logger.warn(`SpaceQueryRepository - findOneByObjectableUuid - Space ${objectableUuid} not found`);

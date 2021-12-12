@@ -69,22 +69,23 @@ describe('UserController tests suite', () => {
       roles: ['ADMIN'],
     });
     expect(response.status).toBe(201);
-    expect(response.body.email).toBe(EMAIL);
-    expect(response.body.status).toBe(1);
-    expect(response.body.uuid).toBeDefined();
-    expect(response.body.createdAt).toBeDefined();
-    expect(response.body.createdBy).toBeDefined();
-    expect(response.body.updatedAt).toBeDefined();
-    expect(response.body.updatedBy).toBeDefined();
+    expect(response.body._email).toBe(EMAIL);
+    expect(response.body._status).toBe(1);
+    expect(response.body._uuid).toBeDefined();
+    expect(response.body._createdAt).toBeDefined();
+    expect(response.body._createdBy).toBeDefined();
+    expect(response.body._updatedAt).toBeDefined();
+    expect(response.body._updatedBy).toBeDefined();
   });
 
   it('UPDATE - should return a UserInterface', async () => {
     const postResponse = await request(app.getHttpServer()).post('/users').send({
       email: EMAIL,
       password: PASSWORD,
+      roles: ['ADMIN']
     });
     const response = await request(app.getHttpServer())
-      .put(`/users/${postResponse.body.uuid}`)
+      .put(`/users/${postResponse.body._uuid}`)
       .send({
         status: 3,
         email: `${EMAIL}.br`,
@@ -93,13 +94,13 @@ describe('UserController tests suite', () => {
       .set({ 'Authorization': `Bearer ${token}` })
     ;
     expect(response.status).toBe(200);
-    expect(response.body.email).toBe(`${EMAIL}.br`);
-    expect(response.body.status).toBe(3);
-    expect(response.body.uuid).toBeDefined();
-    expect(response.body.createdAt).toBeDefined();
-    expect(response.body.createdBy).toBeDefined();
-    expect(response.body.updatedAt).toBeDefined();
-    expect(response.body.updatedBy).toBeDefined();
+    expect(response.body._email).toBe(`${EMAIL}.br`);
+    expect(response.body._status).toBe(3);
+    expect(response.body._uuid).toBeDefined();
+    expect(response.body._createdAt).toBeDefined();
+    expect(response.body._createdBy).toBeDefined();
+    expect(response.body._updatedAt).toBeDefined();
+    expect(response.body._updatedBy).toBeDefined();
   });
 
   it('UPDATE - should return a 401', async () => {
@@ -132,14 +133,15 @@ describe('UserController tests suite', () => {
     const postResponse = await request(app.getHttpServer()).post('/users').send({
       email: EMAIL,
       password: PASSWORD,
+      roles: ['ADMIN']
     });
     const response = await request(app.getHttpServer())
-      .delete(`/users/${postResponse.body.uuid}`)
+      .delete(`/users/${postResponse.body._uuid}`)
       .send()
       .set({ 'Authorization': `Bearer ${token}` })
     ;
     expect(response.status).toBe(200);
-    expect(response.body.status).toBe(0);
+    expect(response.body._status).toBe(0);
   });
 
   it('DELETE - should return a 401', async () => {

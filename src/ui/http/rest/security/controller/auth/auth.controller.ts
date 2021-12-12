@@ -43,7 +43,7 @@ export class AuthController extends BaseController {
       const token: TokenInterface = await this._queryBus.execute(query);
       return plainToClass(TokenTransformer, token, { strategy: 'excludeAll', excludeExtraneousValues: true })
     } catch (e) {
-      const message: string = `AuthController - login error: ${e.message}`;
+      const message: string = `login error: ${e.message}`;
       this.http400Response(message);
     }
   }
@@ -57,7 +57,7 @@ export class AuthController extends BaseController {
       const token: TokenInterface = await this._queryBus.execute(query);
       return plainToClass(TokenTransformer, token, { strategy: 'excludeAll', excludeExtraneousValues: true })
     } catch (e) {
-      const message: string = `AuthController - login error: ${e.message}`;
+      const message: string = `login error: ${e.message}`;
       this.http400Response(message);
     }
   }

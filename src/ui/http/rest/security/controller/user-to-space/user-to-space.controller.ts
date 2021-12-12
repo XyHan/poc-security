@@ -61,7 +61,7 @@ export class UserToSpaceController extends BaseController {
       );
       return await this._commandBus.execute(command);
     } catch (e) {
-      const message: string = `UserToSpaceController - Bind user ${userUuid} to space ${spaceUuid} - error: ${e.message}`;
+      const message: string = `Bind user ${userUuid} to space ${spaceUuid} - error: ${e.message}`;
       this.http400Response(message);
     }
   }
@@ -79,7 +79,7 @@ export class UserToSpaceController extends BaseController {
       await this._commandBus.execute(command);
       return { message: `user ${userUuid} and space ${spaceUuid} have been unbound` };
     } catch (e) {
-      const message: string = `UserToSpaceController - Unbind user ${userUuid} to space ${spaceUuid} - error: ${e.message}`;
+      const message: string = `Unbind user ${userUuid} to space ${spaceUuid} - error: ${e.message}`;
       this.http400Response(message);
     }
   }

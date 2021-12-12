@@ -108,7 +108,7 @@ describe('AuthController tests suite', () => {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
       );
     expect(response.status).toBe(400);
-    expect(response.body.message).toContain('AuthController - login error: RefreshTokenQueryHandler - Invalid token');
+    expect(response.body.message).toContain('login error: RefreshTokenQueryHandler - Invalid token');
   });
 
   it('GET - without auth - should return an error', async () => {

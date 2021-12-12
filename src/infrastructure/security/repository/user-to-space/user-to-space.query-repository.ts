@@ -13,6 +13,7 @@ import { SpaceInterface } from '../../../../domain/model/security/space.model';
 import {
   UserToSpaceRepositoryException
 } from '../../../../domain/repository/user-to-space/user-to-space.repository.exception';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UserToSpaceQueryRepository implements UserToSpaceQueryRepositoryInterface {
@@ -29,7 +30,8 @@ export class UserToSpaceQueryRepository implements UserToSpaceQueryRepositoryInt
     try {
       let options: FindOneOptions<UserToSpaceEntity> = {};
       if (sources && sources.length) { options.select = sources; }
-      return await this.repository.findOneOrFail({ user, space }, options);
+      const userToSpaceBinding: UserToSpaceInterface = await this.repository.findOneOrFail({ user, space }, options);
+      return plainToClass(UserToSpaceEntity, userToSpaceBinding, { strategy: 'excludeAll', excludeExtraneousValues: true });
     } catch (e) {
       if (e.name === 'EntityNotFound') {
         this._logger.warn(`UserToSpaceQueryRepository - findOneByUserUuidAndSpaceUuid - userToSpace not found with User ${user.uuid} and Space ${space.uuid}`);

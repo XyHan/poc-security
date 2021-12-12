@@ -23,7 +23,7 @@ export abstract class BaseController {
   }
 
   protected http404Response(message: string): HttpException {
-    this._logger.error(message);
+    this._logger.warn(message);
     throw new HttpException(message, HttpStatus.NOT_FOUND);
   }
 

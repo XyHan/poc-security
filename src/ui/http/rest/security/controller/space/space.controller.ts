@@ -50,8 +50,8 @@ export class SpaceController extends BaseController {
       @Body() createASpaceDto: CreateASpaceDto,
       @CurrentUser() user: UserInterface
   ): Promise<SpaceInterface> {
+    const uuid: string = v4();
     try {
-      const uuid: string = v4();
       const command = new CreateASpaceCommand(
         uuid,
         user.uuid,
@@ -59,11 +59,11 @@ export class SpaceController extends BaseController {
         createASpaceDto.objectableType
       );
       await this._commandBus.execute(command);
-      return await this.findOneSpaceByUuid(uuid);
     } catch (e) {
-      const message: string = `SpaceController - Add space error: ${e.message}`;
+      const message: string = `Add space error: ${e.message}`;
       this.http400Response(message);
     }
+    return await this.findOneSpaceByUuid(uuid);
   }
 
   @Delete('/:uuid')
@@ -76,11 +76,11 @@ export class SpaceController extends BaseController {
     try {
       const command = new DeleteASpaceCommand(uuid, user.uuid);
       await this._commandBus.execute(command);
-      return await this.findOneSpaceByUuid(uuid);
     } catch (e) {
-      const message: string = `SpaceController - Delete space ${uuid} error: ${e.message}`;
+      const message: string = `Delete space ${uuid} error: ${e.message}`;
       this.http400Response(message);
     }
+    return await this.findOneSpaceByUuid(uuid);
   }
 
   private async findOneSpaceByUuid(uuid: string, nullable: boolean = false): Promise<SpaceInterface | null> {
@@ -89,14 +89,13 @@ export class SpaceController extends BaseController {
       const query = new GetOneSpaceByUuidQuery(uuid, []);
       space = await this._queryBus.execute(query);
     } catch (e) {
-      const message: string = ` SpaceController - findOneSpaceByUuid ${uuid} error. Previous: ${e.message}`;
+      const message: string = `findOneSpaceByUuid ${uuid} error. Previous: ${e.message}`;
       this.http400Response(message);
     }
     if (!space && !nullable) {
-      const message: string = ` SpaceController - Space ${uuid} not found`;
+      const message: string = `Space ${uuid} not found`;
       this.http404Response(message);
     }
-
-    return plainToClass(SpaceEntity, space);
+    return space;
   }
 }
