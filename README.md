@@ -32,6 +32,16 @@ Poc Security API
 $ npm install
 ```
 
+## Env var
+
+```bash
+$ export DB_HOST=0.0.0.0
+$ export DB_PORT=3306
+$ export DB_USER=root
+$ export DB_PASSWORD=toor
+$ export DB_DATABASE=security
+```
+
 ## Running the app
 
 ```bash
