@@ -15,7 +15,7 @@ export class UserEntity implements UserInterface {
   @Index('IDX_USER_EMAIL')
   @Column({ type: 'varchar', length: 200, name: 'email', nullable: false, unique: true  }) public email: string;
 
-  @Exclude()
+  @Expose()
   @Column({ type: 'varchar', name: 'password', nullable: false }) public password: string;
 
   @Exclude()

@@ -1,3 +1,7 @@
+#!make
+include .env
+export $(shell sed 's/=.*//' .env)
+
 DOCKER = docker-compose -f ./docker-compose.yml -p poc-security
 
 .PHONY: start

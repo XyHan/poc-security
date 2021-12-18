@@ -25,6 +25,8 @@ import { GetOneUserByUuidQuery } from '../../../../../../application/query/user/
 import { AuthGuard } from '../../../../guard/auth.guard';
 import { CurrentUser } from '../../../../../../infrastructure/security/decorator/current-user.decorator';
 import { Roles } from '../../../../../../infrastructure/security/decorator/role.decorator';
+import { plainToClass } from 'class-transformer';
+import { UserView } from '../../view/user.view';
 
 @Controller('/users')
 export class UserController extends BaseController {
@@ -131,6 +133,6 @@ export class UserController extends BaseController {
       const message: string = `User ${uuid} not found`;
       this.http404Response(message);
     }
-    return user;
+    return plainToClass(UserView, user, { strategy: 'excludeAll', excludeExtraneousValues: true });
   }
 }

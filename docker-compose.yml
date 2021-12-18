@@ -7,7 +7,7 @@ services:
     hostname: "poc-security-mysql"
     restart: "no"
     environment:
-      MYSQL_ROOT_PASSWORD: "toor"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     ports:
       - "3306:3306"
     volumes:
